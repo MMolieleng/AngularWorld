@@ -5,3 +5,20 @@
   <h3>Countries and their continents</h3>
 </ng-template>
 <!-- End of simple template-->
+
+<!-- Using templates with inputs -->
+<ul>
+  <li *ngFor="let mCountry of countries">
+    <ng-container *ngTemplateOutlet="countryTemplate; context:{$implicit: mCountry}">
+    </ng-container>
+  </li>
+</ul>
+
+<ng-template #countryTemplate let-country>
+  <div>
+    <h3>Country : {{country.name}}</h3>
+    <p>Continent : {{country.continent}}</p>
+  </div>
+</ng-template>
+
+<!-- End of template with inputs -->
