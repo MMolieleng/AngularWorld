@@ -4,9 +4,17 @@
 <ng-template #titleTemplate>
   <h3>Countries and their continents</h3>
 </ng-template>
+
+<ng-template #variableContextTemplate>
+  <h3>Context Variables</h3>
+</ng-template>
 <!-- End of simple template-->
 
-<!-- Using templates with inputs -->
+<!-- Using templates with context
+Context allows dynamic variables to be passed into the template.
+In the below example we will use implicit parameters to the template
+ -->
+<hr>
 <ul>
   <li *ngFor="let mCountry of countries">
     <ng-container *ngTemplateOutlet="countryTemplate; context:{$implicit: mCountry}">
@@ -17,6 +25,26 @@
 <ng-template #countryTemplate let-country>
   <div>
     <h3>Country : {{country.name}}</h3>
+    <p>Continent : {{country.continent}}</p>
+  </div>
+</ng-template>
+
+<!-- End of template with inputs -->
+
+<!-- Using templates with explicit context variables
+ -->
+<hr>
+<ng-container [ngTemplateOutlet]="variableContextTemplate"></ng-container>
+<ul>
+  <li *ngFor="let mCountry of countries">
+    <ng-container *ngTemplateOutlet="countryVariableTemplate; context:{country: mCountry}">
+    </ng-container>
+  </li>
+</ul>
+
+<ng-template #countryVariableTemplate let-country="country">
+  <div>
+    <h5>Country : {{country.name}}</h5>
     <p>Continent : {{country.continent}}</p>
   </div>
 </ng-template>
